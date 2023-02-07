@@ -1,7 +1,9 @@
+// import Button from '@mui/material/Button';
 
+// const CheckOutButton = () => {
+// //     return (
+// //         <Button variant="text">Check Out</Button>
+// //     )
+// // };
 
-const CheckOutButton = () => {
-    return <button>Check out</button>
-};
-
-export default CheckOutButton;
+// export default CheckOutButton;
