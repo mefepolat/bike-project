@@ -2,6 +2,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Alert } from '@mui/material';
 import {useState} from "react";
 import './Form.css';
 
@@ -28,6 +29,7 @@ function SelectStation() {
         <MenuItem value={20}>Anju</MenuItem>
         <MenuItem value={30}>Laval</MenuItem>
       </Select>
+      <Alert severity="success">This is a success alert — check it out!</Alert>
     </FormControl>
     </div>
   );
