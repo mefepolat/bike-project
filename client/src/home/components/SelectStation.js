@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Alert } from '@mui/material';
 import {useState} from "react";
-import './Form.css';
+import './SelectStation.css';
 
 function SelectStation() {
   const [station, setStation] = useState('');
