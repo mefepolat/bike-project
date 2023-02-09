@@ -5,8 +5,13 @@ const User = require('./models/user');
 const mongoSanitize = require('express-mongo-sanitize');
 const session = require('express-session');
 const LocalStrategy = require('passport-local');
+const passport = require('passport');
 
-app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(mongoSanitize());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 const dbUrl = 'mongodb://localhost:27017/bike-rental';
 mongoose.set('strictQuery', false);
