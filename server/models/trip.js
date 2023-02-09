@@ -1,12 +1,13 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
     start_date:{
-        type: new Date().toUTCString()
+        type: Date
     },
     end_date: {
-        type: new Date().toUTCString()
+        type: Date
     },
     duration: {
         type: Number
