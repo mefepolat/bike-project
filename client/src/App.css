@@ -19,6 +19,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   position: relative;
+  bottom: 0;
 }
 
 .overlay {

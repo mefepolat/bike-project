@@ -1,5 +1,7 @@
 // import CheckOutButton from "../components/CheckOutButton";
+
 import SelectStation from "../components/SelectStation"
+
 
 const HomePage = () => {
     return (
@@ -8,6 +10,9 @@ const HomePage = () => {
             
             
             <SelectStation />
+
+          
+            
         </div>
     )
 };

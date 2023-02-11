@@ -5,6 +5,8 @@ import "./App.css"
 import Admin from './user/pages/Admin';
 import background from "./images/bckgrnd.jpg"
 import NavBar from './shared/components/Navbar';
+import Footer from './shared/components/Footer';
+
 
 
 function App() {
@@ -21,8 +23,11 @@ function App() {
           <Route path='*' element={<Navigate to='/' />} />
           </Routes>
       </BrowserRouter>
+      <Footer />
       </div>
+    
       </div>
+      
   );
 };
 
