@@ -6,6 +6,8 @@ import Admin from './user/pages/Admin';
 import background from "./images/bckgrnd.jpg"
 import NavBar from './shared/components/Navbar';
 import Footer from './shared/components/Footer';
+import SignIn from './home/pages/SignIn';
+import SignUp from './home/pages/SignUp';
 
 
 
@@ -19,7 +21,8 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/admin' element={<Admin />} />
-          
+          <Route path='/login' element={<SignIn />} />
+          <Route path='/register' element={<SignUp />} />
           <Route path='*' element={<Navigate to='/' />} />
           </Routes>
       </BrowserRouter>
