@@ -19,7 +19,7 @@ const SignUpForm = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, email, password })
+        body: JSON.stringify({username,email,password})
       });
       const data = await response.json();
       console.log(data);
@@ -37,6 +37,7 @@ const SignUpForm = () => {
             <input 
             type="text"
             id="username"
+            name="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)} />
         </div>
@@ -70,6 +71,6 @@ const SignUpForm = () => {
       <button type="submit">Sign Up</button>
     </form>
   );
-};
+};  
 
 export default SignUpForm;

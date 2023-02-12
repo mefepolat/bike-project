@@ -1,7 +1,6 @@
-​
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-​
+
 const tripSchema = new Schema({
     start_date: {
         type: Date
@@ -27,5 +26,5 @@ const tripSchema = new Schema({
         ref: 'Bike'
     }
 })
-​
+
 module.exports = mongoose.model('Trip', tripSchema);

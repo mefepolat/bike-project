@@ -11,11 +11,15 @@ const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const path = require('path');
 const adminRoutes = require('./routes/admin');
+const userRoutes = require('./routes/user');
 app.use(cors());
 const {createProxyMiddleware} = require('http-proxy-middleware');
+const bodyParser = require("body-parser");
 
 
 const dbUrl = 'mongodb://localhost:27017/bike-rental';
+
+app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -79,8 +83,9 @@ app.use((req,res,next) => {
   
   next();
 });
-
+app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
+
 
 
 
