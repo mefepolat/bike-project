@@ -5,6 +5,7 @@ import "./App.css"
 import Admin from './user/pages/Admin';
 import background from "./images/bckgrnd.jpg"
 import NavBar from './shared/components/Navbar';
+import AboutPage from './shared/components/AboutPage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/about' element={<AboutPage/>} />
           
           <Route path='*' element={<Navigate to='/' />} />
           </Routes>
