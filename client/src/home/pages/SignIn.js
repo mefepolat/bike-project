@@ -5,9 +5,25 @@ const SignIn = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-    }
+    
+        try {
+          const response = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+          });
+          const data = await response.json();
+          console.log(data);
+          // Add logic to handle successful sign in
+        } catch (error) {
+          console.error(error);
+          // Add logic to handle sign in failure
+        }
+      };
     
     return (
         <form onSubmit={handleSubmit}>

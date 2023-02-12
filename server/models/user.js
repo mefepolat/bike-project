@@ -21,6 +21,10 @@ const userSchema = new Schema({
     trips: [{
         type: Schema.Types.ObjectId,
         ref: 'Trip'
+    }],
+    reports: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Report'
     }]
 });
 
