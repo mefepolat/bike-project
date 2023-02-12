@@ -8,7 +8,7 @@ router.route('/signup')
 .post(catchAsync(registerUser));
 
 router.route('/login')
-.post(passport.authenticate('local', {failureFlash: true, failureRedirect:'/login', keepSessionInfo: true}), login)
+.post(login)
 
 // router.get('/logout', logout)
 
