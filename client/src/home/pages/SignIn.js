@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext} from "react";
+import { useState, useContext} from "react";
 import './SignIn.css'
 import { AuthContext } from "../../shared/components/AuthContext";
-import { Navigate } from "react-router";
+
 import {useNavigate} from "react-router-dom";
 
 

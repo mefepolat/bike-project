@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const SignUpForm = () => {
     const [username,setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,8 +23,8 @@ const SignUpForm = () => {
         },
         body: JSON.stringify({username,email,password})
       });
-      const data = await response.json();
-      console.log(data);
+      
+      return navigate("/login")
       // Add logic to handle successful sign up
     } catch (error) {
       console.error(error);
