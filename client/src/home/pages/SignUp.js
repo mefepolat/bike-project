@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate, redirect } from 'react-router';
+import { useNavigate } from 'react-router';
+
 
 const SignUpForm = () => {
     const [username,setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     if (password !== confirmPassword) {
       // Show an error message indicating that the passwords do not match
       return console.log("your passwords do not match.")
     }
-
+    
     try {
       const response = await fetch('http://localhost:3000/api/signup', {
         method: 'POST',
@@ -24,11 +27,12 @@ const SignUpForm = () => {
         body: JSON.stringify({username,email,password})
       });
       const result = await response.json();
-      return await redirect("/login");
-      // Add logic to handle successful sign up
+      
+      navigate("/login");
     } catch (error) {
       console.error(error);
-      // Add logic to handle sign up failure
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -70,7 +74,7 @@ const SignUpForm = () => {
           onChange={(event) => setConfirmPassword(event.target.value)}
         />
       </div>
-      <button type="submit">Sign Up</button>
+      <button type="submit">{isLoading ? 'Signing up...' : 'Sign Up'}</button>
     </form>
   );
 };  

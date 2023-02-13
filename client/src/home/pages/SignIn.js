@@ -31,11 +31,11 @@ const SignIn = () => {
      login(data._doc);
      console.log(data._doc)
      navigate("/")
-      // Add logic to handle successful sign in
+    
     } catch (error) {
       console.error(error);
       setError('Could not sign in. Please try again.')
-      // Add logic to handle sign in failure
+     
     } finally {
       setIsLoading(false);
     }

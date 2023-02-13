@@ -8,21 +8,12 @@ module.exports.registerUser = async (req,res,next) => {
         const {username,email,password} = req.body;
         const user = new User({username,email});
         const registeredUser = await User.register(user,password);
-        req.login(registeredUser, function(err) {
-            if(err){
-                return next(err);
-            }
-           
-        })
-    } catch (error) {
+        res.json(registeredUser);
+        
+        }
+     catch (error) {
         console.log(error);
     }
-}
-
-module.exports.check = () => {
-  passport.authenticate("jwt", {session:false}, (req,res) => {
-    res.send({user: req.user});
-  })
 }
 
 
