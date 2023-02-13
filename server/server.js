@@ -13,13 +13,15 @@ const path = require('path');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 app.use(cors());
-const {createProxyMiddleware} = require('http-proxy-middleware');
+
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 
-const dbUrl = 'mongodb://localhost:27017/bike-rental';
+const dbUrl = 'mongodb://127.0.0.1:27017/bike-rental';
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -44,7 +46,7 @@ const sessionConfig = {
   store: store,
   name:'session',
   secret: 'justasecret',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
@@ -55,14 +57,7 @@ const sessionConfig = {
 
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-// app.use('/api', createProxyMiddleware({
-//   target: 'http://127.0.0.1:3000/',
-//   changeOrigin: true,
-//   timeout: 5000,
-//   onProxyRes: function (proxyRes, req, res){
-//     proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-//   }
-// }))
+
 app.use(express.urlencoded({extended: true}))
 app.use(mongoSanitize());
 app.use(session(sessionConfig));
@@ -77,12 +72,10 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next) => {
   res.locals.currentUser = req.user;
-  if(res.locals.currentUser){
-    res.locals.currentUserDetails = req.user._doc;
-  }
-  
+
   next();
 });
+
 app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
 

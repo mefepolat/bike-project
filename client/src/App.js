@@ -11,35 +11,37 @@ import AboutPage from './shared/components/AboutPage';
 import Footer from './shared/components/Footer';
 import SignIn from './home/pages/SignIn';
 import SignUp from './home/pages/SignUp';
+import { AuthProvider } from './shared/components/AuthContext';
 
 
 
 
 function App() {
-  return (
-    <div className='body_section'  style={{backgroundImage: `url(${background})`}}>
-      
-      <div className="overlay">
-      <NavBar />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/admin' element={<Admin />} />
-
-          <Route path='/about' element={<AboutPage/>} />
-          
-
-          <Route path='/login' element={<SignIn />} />
-          <Route path='/register' element={<SignUp />} />
-          <Route path='*' element={<Navigate to='/' />} />
-          </Routes>
-      </BrowserRouter>
-      <Footer />
-      </div>
+ return ( <AuthProvider>
+  <div className='body_section'  style={{backgroundImage: `url(${background})`}}>
     
-      </div>
+    <div className="overlay">
+    <NavBar />
+    <BrowserRouter>
+      <Routes>
       
-  );
+        <Route path='/' element={<HomePage />} />
+        <Route path='/admin' element={<Admin />} />
+
+        <Route path='/about' element={<AboutPage/>} />
+        
+
+        <Route path='/login' element={<SignIn />} />
+        <Route path='/register' element={<SignUp />} />
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
+    </BrowserRouter>
+    <Footer />
+    </div>
+  
+  </div>
+</AuthProvider>
+ )
 };
 
 export default App;
