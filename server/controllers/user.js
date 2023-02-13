@@ -19,32 +19,34 @@ module.exports.registerUser = async (req,res,next) => {
     }
 }
 
+module.exports.check = () => {
+  passport.authenticate("jwt", {session:false}, (req,res) => {
+    res.send({user: req.user});
+  })
+}
+
 
 module.exports.login = (req,res,next) => {
-    passport.authenticate("local", (err, user, info) => {
-        if (err) {
-          return next(err);
-        }
-    
-        if (!user) {
-          return res.status(400).json({
-            success: false,
-            message: "Invalid username or password",
-          });
-        }
-    
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-    
-          return res.json({
-            success: true,
-            message: "Login successful!",
-            user,
-          });
-        });
-      })(req, res, next);
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid username or password",
+      });
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      const newUser = {...user}
+      return res.json(newUser);
+    });
+  })(req, res, next);
 }
 
 module.exports.logout = (req,res,next) => {
@@ -53,5 +55,11 @@ module.exports.logout = (req,res,next) => {
         if(error){
             return next(error)
         }
+        delete req.session.returnTo;
+        return res.json({
+          success:true,
+          message: "Successfully logged out."
+        })
     })
+    
 }
