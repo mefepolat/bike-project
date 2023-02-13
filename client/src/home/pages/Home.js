@@ -1,5 +1,6 @@
 // import CheckOutButton from "../components/CheckOutButton";
 
+import CheckOutButton from "../components/CheckOutButton";
 import SelectStation from "../components/SelectStation"
 
 
@@ -10,6 +11,7 @@ const HomePage = () => {
             
             
             <SelectStation />
+            <CheckOutButton/>
 
           
             
