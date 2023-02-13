@@ -3,8 +3,9 @@ const Trips = require('./models/trips')
 
 module.exports.isLoggedIn = (req,res,next) => {
     if(!req.isAuthenticated()){
-        req.session.returnTo = req.originalUrl;
-        throw new ExpressError('you are not authenticated', 500);
+        return res.json({
+            message: "You are not authenticated"
+        })
     }
     next();
 }
