@@ -3,11 +3,14 @@ import DenseTable from "../components/Table";
 import Trips from "../components/Trips";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/components/AuthContext";
-import { Navigate } from "react-router";
+import { Navigate,redirect } from "react-router";
 
 const Admin = () => {
     const {user} = useContext(AuthContext);
-    if(user.isAdmin == false) {
+    if(!user){
+        redirect("/");
+    }
+    if(user.isAdmin === false) {
         return <Navigate to="/" />
     }
     return (
