@@ -1,8 +1,8 @@
 import {AuthContext } from "../../shared/components/AuthContext";
 import { useContext } from "react";
 import ReportButton from "../components/ReportButton";
-
-
+import BeginTrip from "../components/BeginTrip";
+import CheckOutButton from "../components/CheckOutButton";
 
 
 const HomePage = () => {
@@ -14,7 +14,7 @@ const HomePage = () => {
   
         {user ? (
            <div>
-           <SelectStation />
+           <BeginTrip />
           <CheckOutButton />
           <ReportButton />
             
@@ -22,7 +22,7 @@ const HomePage = () => {
             
         </div>
 
-            </div>
+           
 
         
         ) : (
