@@ -12,6 +12,7 @@ import Footer from './shared/components/Footer';
 import SignIn from './home/pages/SignIn';
 import SignUp from './home/pages/SignUp';
 import { AuthProvider } from './shared/components/AuthContext';
+import ReportPage from './home/pages/ReportPage';
 
 
 
@@ -33,7 +34,9 @@ function App() {
 
         <Route path='/login' element={<SignIn />} />
         <Route path='/register' element={<SignUp />} />
+        <Route path='/report' element={<ReportPage />} />
         <Route path='*' element={<Navigate to='/' />} />
+        
       </Routes>
     </BrowserRouter>
     <Footer />
