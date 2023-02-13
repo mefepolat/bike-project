@@ -1,6 +1,5 @@
 // import CheckOutButton from "../components/CheckOutButton";
 
-import SelectStation from "../components/SelectStation";
 import {AuthContext } from "../../shared/components/AuthContext";
 import { useContext } from "react";
 
@@ -15,8 +14,6 @@ const HomePage = () => {
             <h1>HomePage</h1>
             
             
-            <SelectStation />
-
           
             
         </div>

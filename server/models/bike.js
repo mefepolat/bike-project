@@ -5,7 +5,11 @@ const bikeSchema = new Schema({
     bikeType: {
         type: String
     },
-    isInCirculation: {
+    isRented: {
+        type: Boolean,
+        default: false
+    },
+    isInMaintenance: {
         type: Boolean,
         default: false
     }
