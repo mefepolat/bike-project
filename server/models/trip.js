@@ -18,6 +18,10 @@ const tripSchema = new Schema({
     end_station: {
         type: String
     },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
     rider: {
         type: Schema.Types.ObjectId,
         ref: 'User'

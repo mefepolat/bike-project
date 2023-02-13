@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, redirect } from 'react-router';
 
 const SignUpForm = () => {
     const [username,setUsername] = useState('');
@@ -23,8 +23,8 @@ const SignUpForm = () => {
         },
         body: JSON.stringify({username,email,password})
       });
-      
-      return navigate("/login")
+      const result = await response.json();
+      return await redirect("/login");
       // Add logic to handle successful sign up
     } catch (error) {
       console.error(error);

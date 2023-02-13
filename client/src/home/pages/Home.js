@@ -1,5 +1,3 @@
-import CheckOutButton from "../components/CheckOutButton";
-import SelectStation from "../components/SelectStation";
 import {AuthContext } from "../../shared/components/AuthContext";
 import { useContext } from "react";
 import ReportButton from "../components/ReportButton";
@@ -20,7 +18,12 @@ const HomePage = () => {
           <CheckOutButton />
           <ReportButton />
             
+          
+            
+        </div>
+
             </div>
+
         
         ) : (
           <div>
