@@ -28,6 +28,7 @@ function SelectStation() {
   const {user} = useContext(AuthContext);
   const handleStationChange = (event) => {
     setStation(event.target.value);
+    
   };
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -64,10 +65,17 @@ function SelectStation() {
         id="bike"
         value={selectedBike || ""}
         onChange={(event) => setSelectedBike(event.target.value)}>
-          <option value="">Select a bike</option>
-          {bikes.map((bike) => {
-            return <option key={bike._id} value={bike._id}>{bike.bikeType}</option>
-          })}
+          {!bikes.length ? (
+    <option value="">No bikes available.</option>
+  ) : (
+    <>
+      <option value="">Select a bike</option>
+      {bikes.map((bike) => (
+        <option key={bike._id} value={bike._id}>
+          {bike.bikeType}
+        </option>
+      ))}
+    </>)}
         </select>
       </div>
       <button type="submit">Begin Trip</button>
