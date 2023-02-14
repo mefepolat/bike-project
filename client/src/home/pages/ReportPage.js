@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
+import {AuthContext} from "../../shared/components/AuthContext";
 
 
 
@@ -6,38 +7,40 @@ import React, { useState } from 'react';
 
 
 const ReportPage = () => {
-  const [report, setReport] = useState('');
-  console.log("Here is the report", report)
+  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const {user} = useContext(AuthContext);
+  
 
   const handleChange = (event) => {
-    setReport(event.target.value);
+    setDescription(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = fetch('http://localhost:3000/api/report', {
+      const response = await fetch('http://127.0.0.1:3000/api/create-report', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ report })
+        body: JSON.stringify({ title, description, user })
       });
-      console.log(response);
-      // Add logic to handle successful sign in
+     
+     console.log(response);
+     
     } catch (error) { 
       console.error(error);
-    } finally {
-      console.log("finally" + report)
-    }
+    } 
 
-
-    // Add code to submit the report here
+  
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea value={report} onChange={handleChange} />
+      <label htmlFor='title'>Title:</label> 
+      <input type='text' name='title' id='title' value={title} onChange={((event) => setTitle(event.target.value))} />
+      <textarea value={description} onChange={handleChange} />
       <button type="submit">Submit Report</button>
     </form>
   );
