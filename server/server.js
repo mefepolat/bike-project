@@ -15,6 +15,7 @@ const userRoutes = require('./routes/user');
 const bikeRoutes = require('./routes/bike');
 app.use(cors());
 
+
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 
@@ -30,6 +31,7 @@ app.use(function(req, res, next) {
   next();
   });
 
+ 
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -80,6 +82,7 @@ app.use((req,res,next) => {
 app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', bikeRoutes);
+
 
 
 

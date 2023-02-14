@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const passport = require('passport')
+const passport = require('passport');
 
 
 module.exports.registerUser = async (req,res,next) => {
@@ -34,8 +34,15 @@ module.exports.login = (req,res,next) => {
       if (err) {
         return next(err);
       }
+      
+      
+      res.cookie('user', JSON.stringify(user), {
+        maxAge: 3600 * 1000,
+        httpOnly: true,
+        secure: true 
+      });
       const newUser = {...user}
-      return res.json(newUser);
+      return res.json({newUser});
     });
   })(req, res, next);
 }
