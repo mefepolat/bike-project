@@ -14,4 +14,4 @@ const reportSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Report', reportSchema);
+module.exports = mongoose.model('Report', reportSchema);  // transfers to database as "reports"

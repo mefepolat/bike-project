@@ -13,6 +13,7 @@ const path = require('path');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 const bikeRoutes = require('./routes/bike');
+const reportRoutes = require('./routes/report');
 app.use(cors());
 
 
@@ -82,6 +83,7 @@ app.use((req,res,next) => {
 app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', bikeRoutes);
+app.use('/api', reportRoutes);
 
 
 
