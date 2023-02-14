@@ -16,7 +16,6 @@ module.exports.registerUser = async (req,res,next) => {
     }
 }
 
-
 module.exports.login = (req,res,next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
@@ -37,7 +36,7 @@ module.exports.login = (req,res,next) => {
       
       
       res.cookie('user', JSON.stringify(user), {
-        maxAge: 3600 * 1000,
+        maxAge: 3600 * 1000, // 1 hour in milliseconds
         httpOnly: true,
         secure: true 
       });
