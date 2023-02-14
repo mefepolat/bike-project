@@ -28,7 +28,7 @@ const SignIn = () => {
       });
       const data = await response.json();
     
-     login(data._doc);
+     login(data.newUser._doc);
      console.log(data._doc)
      navigate("/")
     
