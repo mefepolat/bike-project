@@ -16,7 +16,6 @@ const bikeRoutes = require('./routes/bike');
 const reportRoutes = require('./routes/report');
 app.use(cors());
 
-const Report = require('./models/report'); //Murat
 
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
@@ -33,6 +32,7 @@ app.use(function(req, res, next) {
   next();
   });
 
+ 
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -84,6 +84,7 @@ app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', bikeRoutes);
 app.use('/api', reportRoutes);
+
 
 
 

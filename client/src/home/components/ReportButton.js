@@ -13,7 +13,7 @@ const navigate = useNavigate();
 
   return (
     <button className="report_button" onClick={handleClick}>
-        Demage or loss report
+        Damage or loss report
         </button>
   );
 };
