@@ -1,5 +1,5 @@
 const ExpressError = require('./utils/ExpressError');
-const Trips = require('./models/trips')
+const Trips = require('./models/trip')
 
 module.exports.isLoggedIn = (req,res,next) => {
     if(!req.isAuthenticated()){

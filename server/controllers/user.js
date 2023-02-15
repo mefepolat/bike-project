@@ -16,8 +16,8 @@ module.exports.registerUser = async (req,res,next) => {
     }
 }
 
-module.exports.login = (req,res,next) => {
-  passport.authenticate("local", (err, user, info) => {
+module.exports.login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       return next(err);
     }
@@ -25,26 +25,26 @@ module.exports.login = (req,res,next) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        message: "Invalid username or password",
+        message: 'Invalid username or password',
       });
     }
 
-    req.logIn(user, (err) => {
+    req.login(user, (err) => {
       if (err) {
         return next(err);
       }
-      
-      
-      res.cookie('user', JSON.stringify(user), {
-        maxAge: 3600 * 1000, // 1 hour in milliseconds
+
+      res.cookie('user', user, {
+        maxAge: 3600 * 10000, // 1 hour in milliseconds
         httpOnly: true,
-        secure: true 
+        secure: true,
       });
-      const newUser = {...user}
-      return res.json({newUser});
+
+      const newUser = { ...user };
+      return res.json({ newUser });
     });
   })(req, res, next);
-}
+};
 
 module.exports.logout = (req,res,next) => {
 
@@ -60,3 +60,10 @@ module.exports.logout = (req,res,next) => {
     })
     
 }
+
+
+// module.exports.checkUser = async (req,res,next) =>{
+//   const {userId} = req.body;
+//   const user = await User.findById(userId);
+//   return res.json({user});
+// }
