@@ -20,6 +20,11 @@ module.exports.postTrip = async(req,res,next) => {
     const rider = user._id;
     const addTrip = await User.findById(user._id);
     const bike = await Bike.findById(bikeId);
+    const activeTrip = await Trip.findOne({ rider: rider, end_date: { $eq: null } });
+  if (activeTrip) {
+    return res.json({ message: 'You already have an active trip' });
+  }
+
     if(!bike){
        return res.json({message: 'Bike is not available or not found.'});
     }
@@ -43,15 +48,16 @@ module.exports.postTrip = async(req,res,next) => {
 };
 
 module.exports.endTrip = async(req,res,next) => {
-    const {endDate, endStation} = req.body;
-    const {tripId} = req.params;
-    const trip = await Trip.findByIdAndUpdate(tripId, {end_date: endDate, end_station: endStation, isActive: false});
+    const {endDate, endStation, tripId} = req.body;
+    
+    
+    const trip = await Trip.findByIdAndUpdate(tripId.tripId, {end_date: endDate, end_station: endStation, isActive: false});
     if(!trip){
        return res.json({message: "Trip not found!"});
     }
     const objectId = new ObjectId(trip.bike)
     const bikeId = objectId.toString();
-    console.log(bikeId)
+   
     const bike = await Bike.findByIdAndUpdate(bikeId, {isRented: false});
     
     if(!bike){
@@ -63,3 +69,40 @@ module.exports.endTrip = async(req,res,next) => {
 
     res.json({trip});
 }
+
+
+module.exports.checkTripStatus = async(req,res) => {
+    const {user} = req.session;
+    
+    if (!user || !user._id) {
+        return res.status(401).json({
+            message: 'User not found or invalid.',
+            data: null
+        });
+    }
+    const latestTrip = await Trip.findOne({rider: user._id})
+    .sort({start_date: -1})
+    .limit(1);
+    
+
+if (!latestTrip) {
+    return res.status(401).json({
+        message: 'No trips found for this user.',
+        data: null
+    });
+}
+
+
+if (latestTrip.isActive) {
+    return res.status(200).json({
+        message: 'Active trip found.',
+        data: {tripId: latestTrip._id}
+    }) 
+} else {
+    
+    return res.status(200).json({
+        message: 'No active trips found for this user.',
+        data: null
+    });
+}
+};
