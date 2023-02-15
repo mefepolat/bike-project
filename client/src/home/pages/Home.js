@@ -1,5 +1,5 @@
 import {AuthContext } from "../../shared/components/AuthContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import ReportButton from "../components/ReportButton";
 import BeginTrip from "../components/BeginTrip";
 import EndTrip from "../components/EndTrip";
@@ -8,7 +8,39 @@ import EndTrip from "../components/EndTrip";
 const HomePage = () => {
     const { user } = useContext(AuthContext);
     const [activeTrip, setActiveTrip] = useState(null);
-
+  
+    useEffect(() =>{  
+      
+      const interval = setInterval(() => {
+        fetch('http://localhost:3000/api/status', {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type" : "application/json"
+          },
+          body: JSON.stringify({user})
+        })
+        .then(response => response.json())
+        .then(data => {
+        
+          if(data.data !== null){
+            setActiveTrip(data.data)
+            console.log(data.data)
+          } else{
+            console.log(data.message)
+          }
+          
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }, 1000);
+      return () => {
+        clearInterval(interval)
+      };
+    
+    }, [])
+   
     function handleBeginTrip(tripId){
       setActiveTrip(tripId);
     }

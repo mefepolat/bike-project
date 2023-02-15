@@ -35,7 +35,7 @@ function BeginTrip({onBeginTrip}) {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(bikeId);
-    const startDate = new Date().getUTCDate();
+    const startDate = new Date().toISOString();
     try{
       const response = await fetch("http://localhost:3000/api/newTrip", {
         method: "POST",

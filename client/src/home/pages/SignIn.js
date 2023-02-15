@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import "./SignIn.css";
 import { AuthContext } from "../../shared/components/AuthContext";
-
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -20,14 +20,16 @@ const SignIn = () => {
     try {
       const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      
-        login(data.newUser._doc);
+      const user = Cookies.get('session');
+      console.log(user)
+        login(user);
         
         navigate("/");
       

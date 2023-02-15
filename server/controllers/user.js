@@ -17,7 +17,7 @@ module.exports.registerUser = async (req,res,next) => {
 }
 
 module.exports.login = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', {keepSessionInfo: true}, (err, user, info) => {
     if (err) {
       return next(err);
     }
@@ -39,9 +39,16 @@ module.exports.login = (req, res, next) => {
         httpOnly: true,
         secure: true,
       });
-
+      
       const newUser = { ...user };
-      return res.json({ newUser });
+      
+      req.session.user = { 
+        _id: user._id,
+        username: user.username
+      }
+      
+      return res.json({ newUser,
+      session: req.session });
     });
   })(req, res, next);
 };
@@ -53,6 +60,7 @@ module.exports.logout = (req,res,next) => {
             return next(error)
         }
         delete req.session.returnTo;
+       req.session.destroy();
         return res.json({
           success:true,
           message: "Successfully logged out."

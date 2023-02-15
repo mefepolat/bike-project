@@ -15,7 +15,11 @@ const userRoutes = require('./routes/user');
 const bikeRoutes = require('./routes/bike');
 const reportRoutes = require('./routes/report');
 const tripRoutes = require('./routes/trip');
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3001',
+  optionsSuccessStatus: 200,
+  credentials: true
+}));
 
 
 const bodyParser = require("body-parser");
@@ -29,7 +33,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
   });
@@ -58,6 +62,12 @@ const sessionConfig = {
     httpOnly: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
+  },
+  serialize: (user, done) => done(null,user._id),
+  deserialize: (id, done) => {
+    User.findById(id, (err, user) => {
+      done(err,user)
+    })
   }
 }
 
@@ -78,7 +88,9 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next) => {
   res.locals.currentUser = req.user;
-
+  if(res.locals.currentUser){
+    res.locals.currentUserDetails = req.user._doc;
+  }
   next();
 });
 
@@ -90,6 +102,15 @@ app.use('/api', tripRoutes);
 
 
 
+app.get('/api/session', (req, res) => {
+  const session = req.session;
+  
+  if (session && session.user) {
+    res.json({ loggedIn: true, user: session.user });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
 
 
 
@@ -120,6 +141,7 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => {
   console.log('database connection');
 });
+
 
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
