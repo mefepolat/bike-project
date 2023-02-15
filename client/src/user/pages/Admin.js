@@ -1,5 +1,5 @@
 import Inventory from "../components/Inventory";
-import DenseTable from "../components/Table";
+import InventoryTable from "../components/Table";
 import Trips from "../components/Trips";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/components/AuthContext";
@@ -17,7 +17,7 @@ const Admin = () => {
         <div>
             <h1>Admin Page</h1>
             <Inventory />
-            <DenseTable />
+            <InventoryTable />
             <Trips />
         </div>
     )

@@ -18,7 +18,8 @@ import ReportPage from './home/pages/ReportPage';
 
 
 function App() {
- return ( <AuthProvider>
+ return ( 
+ <AuthProvider>
   <div className='body_section'  style={{backgroundImage: `url(${background})`}}>
     
     <div className="overlay">

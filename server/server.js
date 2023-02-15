@@ -14,6 +14,7 @@ const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 const bikeRoutes = require('./routes/bike');
 const reportRoutes = require('./routes/report');
+const tripRoutes = require('./routes/trip');
 app.use(cors());
 
 
@@ -25,6 +26,7 @@ const dbUrl = 'mongodb://127.0.0.1:27017/bike-rental';
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.json());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -84,6 +86,7 @@ app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', bikeRoutes);
 app.use('/api', reportRoutes);
+app.use('/api', tripRoutes);
 
 
 

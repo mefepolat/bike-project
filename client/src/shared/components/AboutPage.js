@@ -23,4 +23,4 @@ Note : Some parts of this text is taken from bixi.com for only educational purpo
 
 }
 
-export default AboutPage
+export default AboutPage;

@@ -16,15 +16,8 @@ const HomePage = () => {
            <div>
            <BeginTrip />
           <CheckOutButton />
-          <ReportButton />
-            
-          
-            
+          <ReportButton /> 
         </div>
-
-           
-
-        
         ) : (
           <div>
             <a href="/login">Sign in</a>

@@ -23,15 +23,18 @@ function SelectStation() {
     fetchBikes();
   },[]);
 
-  
-
   const {user} = useContext(AuthContext);
   const handleStationChange = (event) => {
     setStation(event.target.value);
     
   };
+  const handleBikeChange = (event) => {
+    setSelectedBike(event.target.value);
+    setBikeId(event.target.value);
+  }
   const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log(bikeId);
     const startDate = new Date().getUTCDate();
     try{
       const response = await fetch("http://localhost:3000/api/newTrip", {
@@ -39,9 +42,10 @@ function SelectStation() {
         headers: {
           "Content-Type" : "application/json"
         },
-        body: JSON.stringify({station, startDate, user})
+        body: JSON.stringify({station,bikeId, startDate, user})
       });
       const trip = await response.json();
+      console.log(trip);
     } catch (err){
       console.error(err);
     }
@@ -54,6 +58,7 @@ function SelectStation() {
         id="station"
         value={station}
         onChange={handleStationChange}>
+          <option value="">Select a station:</option>
           <option value="Saint-Leonard">Saint-Leonard</option>
           <option value="Berri-Uqam">Berri-UQAM</option>
           <option value="Longueuil">Longueui</option>
@@ -64,7 +69,7 @@ function SelectStation() {
         <select
         id="bike"
         value={selectedBike || ""}
-        onChange={(event) => setSelectedBike(event.target.value)}>
+        onChange={handleBikeChange}>
           {!bikes.length ? (
     <option value="">No bikes available.</option>
   ) : (

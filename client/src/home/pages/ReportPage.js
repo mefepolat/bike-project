@@ -10,24 +10,25 @@ const ReportPage = () => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const {user} = useContext(AuthContext);
+  const dummyUser = user;
   
-
   const handleChange = (event) => {
     setDescription(event.target.value);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+   
     try {
-      const response = await fetch('http://127.0.0.1:3000/api/create-report', {
+      const response = await fetch('http://localhost:3000/api/create-report', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ title, description, user })
+        body: JSON.stringify({ title, description,dummyUser })
       });
-     
-     console.log(response);
+     const data = await response.json();
+     console.log(data);
      
     } catch (error) { 
       console.error(error);

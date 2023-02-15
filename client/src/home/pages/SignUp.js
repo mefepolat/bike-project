@@ -26,7 +26,6 @@ const SignUpForm = () => {
         },
         body: JSON.stringify({username,email,password})
       });
-      const result = await response.json();
       
       navigate("/login");
     } catch (error) {

@@ -9,7 +9,7 @@ const NavBar = () => {
         <nav>
             <a href="/">Home</a>
             <a href="/about">ABOUT</a>
-            {console.log(user)}
+          
             {user ? (
                 <SignOutButton />
             ) : (
