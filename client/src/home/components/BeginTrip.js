@@ -3,7 +3,7 @@ import './BeginTrip.css';
 import {useContext} from "react";
 import {AuthContext} from "../../shared/components/AuthContext";
 
-function SelectStation() {
+function BeginTrip({onBeginTrip}) {
   const [station, setStation] = useState('');
   const [bikeId, setBikeId] = useState('');
   const [bikes, setBikes] = useState([]);
@@ -44,8 +44,8 @@ function SelectStation() {
         },
         body: JSON.stringify({station,bikeId, startDate, user})
       });
-      const trip = await response.json();
-      console.log(trip);
+      const data = await response.json();
+      onBeginTrip(data.trip._id)
     } catch (err){
       console.error(err);
     }
@@ -88,4 +88,4 @@ function SelectStation() {
   );
 }
 
-export default SelectStation;
+export default BeginTrip;

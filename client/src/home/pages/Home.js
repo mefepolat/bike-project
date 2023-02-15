@@ -1,12 +1,21 @@
 import {AuthContext } from "../../shared/components/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ReportButton from "../components/ReportButton";
 import BeginTrip from "../components/BeginTrip";
-import CheckOutButton from "../components/CheckOutButton";
+import EndTrip from "../components/EndTrip";
 
 
 const HomePage = () => {
     const { user } = useContext(AuthContext);
+    const [activeTrip, setActiveTrip] = useState(null);
+
+    function handleBeginTrip(tripId){
+      setActiveTrip(tripId);
+    }
+
+    function handleEndTrip(){
+      setActiveTrip(null);
+    }
   
     return (
       <div className="home_section">
@@ -14,9 +23,16 @@ const HomePage = () => {
   
         {user ? (
            <div>
-           <BeginTrip />
-          <CheckOutButton />
-          <ReportButton /> 
+            {activeTrip ? 
+             <>
+             <EndTrip tripId={activeTrip} onEndTrip={handleEndTrip} />
+             <ReportButton /> 
+           </>
+           : <BeginTrip onBeginTrip={handleBeginTrip} />
+            }
+           
+          
+          
         </div>
         ) : (
           <div>

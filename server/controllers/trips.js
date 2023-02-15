@@ -2,6 +2,7 @@ const Trip = require('../models/trip');
 const Bike = require('../models/bike');
 const ExpressError = require('../utils/ExpressError');
 const User = require('../models/user');
+const ObjectId = require('mongodb').ObjectId;
 
 module.exports.getTrips = async(req,res,next) => {
     const trips = await Trips.find({});
@@ -43,21 +44,21 @@ module.exports.postTrip = async(req,res,next) => {
 
 module.exports.endTrip = async(req,res,next) => {
     const {endDate, endStation} = req.body;
-
-    const trip = await Trip.findById(req.params.id);
+    const {tripId} = req.params;
+    const trip = await Trip.findByIdAndUpdate(tripId, {end_date: endDate, end_station: endStation, isActive: false});
     if(!trip){
-        res.json({message: "Trip not found!"});
+       return res.json({message: "Trip not found!"});
     }
-    trip.endDate = endDate;
-    trip.endStation = endStation;
-    trip.isActive = false;
-    const bike = Bike.findById(trip.bikeId);
+    const objectId = new ObjectId(trip.bike)
+    const bikeId = objectId.toString();
+    console.log(bikeId)
+    const bike = await Bike.findByIdAndUpdate(bikeId, {isRented: false});
+    
     if(!bike){
         res.json({message: "Bike not found!"});
     }
-
-    bike.isRented = false;
-
+    
+    
     await bike.save();
 
     res.json({trip});
