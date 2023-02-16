@@ -15,6 +15,7 @@ const userRoutes = require('./routes/user');
 const bikeRoutes = require('./routes/bike');
 const reportRoutes = require('./routes/report');
 const tripRoutes = require('./routes/trip');
+const stationRoutes = require('./routes/station');
 app.use(cors({
   origin: 'http://localhost:3001',
   optionsSuccessStatus: 200,
@@ -105,7 +106,7 @@ app.get('/api/session', (req, res) => {
     res.json({ loggedIn: false });
   }
 });
-
+app.use('/api', stationRoutes);
 app.use('/api', userRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', bikeRoutes);

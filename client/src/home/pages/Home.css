@@ -1,6 +1,95 @@
-body{
-    box-sizing: border-box;
-    height: 100%;
-    margin-top: 0;
+body {
+  box-sizing: border-box;
+  height: 100%;
+  margin-top: 0;
 }
+
+.begin-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    
+  }
+  
+  .bike-and-trip {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .BikeMap {
+    width: 50%;
+   margin-right: 20px;
+  }
+  
+  .BeginTrip {
+    width: 50%;
+    
+  }
+  
+  .begin-message {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 2px 2px #000000;
+    margin-bottom: 1rem;
+  }
+.landing-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  margin-top: 6em;
+}
+
+.landing-message p {
+  margin-top: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: #f1f1f1;
+  text-align: center;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.landing-message a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.landing-message a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.container {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+  
+
+.welcome-message {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 2px 2px #000000;
+    margin-top: 2rem;
+  }
 
