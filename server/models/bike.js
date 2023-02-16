@@ -12,6 +12,10 @@ const bikeSchema = new Schema({
     isInMaintenance: {
         type: Boolean,
         default: false
+    },
+    station: {
+        type: Schema.Types.ObjectId,
+        ref: 'Station'
     }
 })
 

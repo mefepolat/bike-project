@@ -44,7 +44,7 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
-  console.log(req.user)
+  
   req.session.destroy();
 
   req.logout(function (error) {

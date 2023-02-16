@@ -8,7 +8,7 @@ const NavBar = () => {
     return (
         <nav>
             <a href="/">Home</a>
-            <a href="/about">ABOUT</a>
+            <a href="/about">About</a>
           
             {user ? (
                 <SignOutButton />
