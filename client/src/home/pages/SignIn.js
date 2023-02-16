@@ -27,8 +27,9 @@ const SignIn = () => {
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      const user = Cookies.get('session');
-      console.log(user)
+      console.log(data);
+      const user = data.session;
+      
         login(user);
         
         navigate("/");

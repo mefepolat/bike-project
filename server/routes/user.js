@@ -10,7 +10,8 @@ router.route('/signup')
 router.route('/login')
 .post(login)
 
-router.get('/logout', logout)
+router.route('/logout')
+.post(logout)
 
 // router.post('/checkUser', checkUser)
 

@@ -34,12 +34,12 @@ const HomePage = () => {
         .catch(error => {
           console.error(error);
         });
-      }, 1000);
+      }, 5000);
       return () => {
         clearInterval(interval)
       };
     
-    }, [])
+    }, [user])
    
     function handleBeginTrip(tripId){
       setActiveTrip(tripId);

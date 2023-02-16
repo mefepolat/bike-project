@@ -2,10 +2,6 @@ import { useState, useContext } from 'react';
 import {AuthContext} from "../../shared/components/AuthContext";
 
 
-
-
-
-
 const ReportPage = () => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
