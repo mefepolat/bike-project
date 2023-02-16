@@ -4,17 +4,25 @@ import { AuthContext } from "./AuthContext";
 import { redirect } from "react-router";
 
 const SignOutButton = () => {
-    const {logout} = useContext(AuthContext);
+    const {logout, user} = useContext(AuthContext);
     
     const handleSignOut = async () => {
         try {
-        axios
-        .post('http://localhost:3000/logout');
+        const response = await fetch('http://localhost:3000/api/logout', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                "Content-Policy": "application/json"
+            },
+            
+        })
+      
         logout();
-        return redirect('/');
+        redirect('/');
+        console.log(response)
         }
      catch (err) {
-        console.log(err)
+        return console.log(err)
     }
 }
     return (

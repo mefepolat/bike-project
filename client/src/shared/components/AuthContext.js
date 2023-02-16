@@ -1,7 +1,6 @@
 import {createContext, useEffect, useState} from 'react';
-import Cookies from 'js-cookie';
 import { fetchSession } from './FetchSession';
-
+import Cookies from 'js-cookie';
 
 export const AuthContext = createContext({
     user:null,
@@ -16,21 +15,29 @@ export const AuthProvider = (props) => {
     useEffect(() => {
         const checkLoginStatus = async() =>{
             const session = await fetchSession();
-            console.log(session)
+           
             setUser(session|| null);
         };
         checkLoginStatus();
     },[])
 
+    useEffect(() => {
+        if (!user) {
+            Cookies.remove('session');
+            console.log(user)
+        }
+    }, [user])
 
 
     const login = (user) => {
         setUser(user);
+        Cookies.set('session', user, {expires: 7})
     };
 
     const logout = () => {
         setUser(null);
-        
+        console.log(user)
+        Cookies.remove('session');
     }
 
     return (
