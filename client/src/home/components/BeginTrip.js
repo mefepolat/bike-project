@@ -8,20 +8,39 @@ function BeginTrip({onBeginTrip}) {
   const [bikeId, setBikeId] = useState('');
   const [bikes, setBikes] = useState([]);
   const [selectedBike, setSelectedBike] = useState('');
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/stations");
+        const data = await response.json();
+        setStations(data);
+        console.log(data)
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchStations();
+  }, []);
 
   useEffect(() => {
     const fetchBikes = async () => {
-      try{
-        const response = await fetch("http://localhost:3000/api/bikes");
+      console.log(station)
+      try {
+        const response = await fetch(`http://localhost:3000/api/bikes?station=${station}`);
         const data = await response.json();
-        console.log(data);
         setBikes(data);
       } catch (err) {
         console.error(err);
       }
+    };
+    if (station) {
+      fetchBikes();
+    } else {
+      setBikes([]);
     }
-    fetchBikes();
-  },[]);
+  }, [station]);
 
   const {user} = useContext(AuthContext);
   const handleStationChange = (event) => {
@@ -30,11 +49,14 @@ function BeginTrip({onBeginTrip}) {
   };
   const handleBikeChange = (event) => {
     setSelectedBike(event.target.value);
+   
     setBikeId(event.target.value);
+    
   }
+ 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(bikeId);
+   
     const startDate = new Date().toISOString();
     try{
       const response = await fetch("http://localhost:3000/api/newTrip", {
@@ -45,6 +67,7 @@ function BeginTrip({onBeginTrip}) {
         body: JSON.stringify({station,bikeId, startDate, user})
       });
       const data = await response.json();
+      console.log(data)
       onBeginTrip(data.trip._id)
     } catch (err){
       console.error(err);
@@ -59,19 +82,21 @@ function BeginTrip({onBeginTrip}) {
         value={station}
         onChange={handleStationChange}>
           <option value="">Select a station:</option>
-          <option value="Saint-Leonard">Saint-Leonard</option>
-          <option value="Berri-Uqam">Berri-UQAM</option>
-          <option value="Longueuil">Longueui</option>
+          {stations.map((station) => {
+            return <option key={station._id} value={station._id}>
+              {station.stationName}
+            </option>
+          })}
         </select>
       </div>
       <div>
-        <label htmlFor="station">Available Bikes:</label>
+        <label htmlFor="bike">Available Bikes:</label>
         <select
         id="bike"
         value={selectedBike || ""}
         onChange={handleBikeChange}>
           {!bikes.length ? (
-    <option value="">No bikes available.</option>
+    <option value="" disabled>No bikes available.</option>
   ) : (
     <>
       <option value="">Select a bike</option>
@@ -83,7 +108,7 @@ function BeginTrip({onBeginTrip}) {
     </>)}
         </select>
       </div>
-      <button type="submit">Begin Trip</button>
+      <button type="submit" disabled={!selectedBike}>Begin Trip</button>
     </form>
   );
 }

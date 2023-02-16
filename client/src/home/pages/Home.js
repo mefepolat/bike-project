@@ -8,9 +8,9 @@ import BikeMap from "../../shared/components/BikeMap";
 const HomePage = () => {
     const { user } = useContext(AuthContext);
     const [activeTrip, setActiveTrip] = useState(null);
-  
+    
     useEffect(() =>{  
-      
+      if(user){
       const interval = setInterval(() => {
         fetch('http://localhost:3000/api/status', {
           method: "POST",
@@ -22,14 +22,14 @@ const HomePage = () => {
         })
         .then(response => response.json())
         .then(data => {
-        
+          
           if(data.data !== null){
             setActiveTrip(data.data)
-            console.log(data.data)
+           
           } else{
             console.log(data.message)
           }
-          
+        
         })
         .catch(error => {
           console.error(error);
@@ -38,7 +38,7 @@ const HomePage = () => {
       return () => {
         clearInterval(interval)
       };
-    
+      }
     }, [user])
    
     function handleBeginTrip(tripId){

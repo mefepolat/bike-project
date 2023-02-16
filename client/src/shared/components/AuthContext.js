@@ -24,7 +24,7 @@ export const AuthProvider = (props) => {
     useEffect(() => {
         if (!user) {
             Cookies.remove('session');
-            console.log(user)
+            
         }
     }, [user])
 
@@ -36,7 +36,7 @@ export const AuthProvider = (props) => {
 
     const logout = () => {
         setUser(null);
-        console.log(user)
+       
         Cookies.remove('session');
     }
 
