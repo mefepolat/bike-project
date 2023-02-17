@@ -7,6 +7,7 @@ const NavBar = () => {
    const {user} = useContext(AuthContext);
     return (
         <nav>
+            <img src="../../images/logo.png" alt="Logo" className="logo" />
             <a href="/">Home</a>
             <a href="/about">About</a>
           
@@ -24,3 +25,5 @@ const NavBar = () => {
 }
 
 export default NavBar;
+
+//This is an github clear
