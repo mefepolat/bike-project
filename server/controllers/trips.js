@@ -19,12 +19,19 @@ module.exports.getTrips = async(req,res,next) => {
 module.exports.postTrip = async(req,res,next) => {
     const {bikeId, startDate, station: stationId, user} = req.body;
    
-    const rider = user.user._id;
+    const rider = user._id;
     const activeTrip = await Trip.findOne({ rider: rider, isActive: { $eq: true } });
     if (activeTrip) {
         return res.json({ message: 'You already have an active trip' });
       }
-    const addTrip = await User.findById(user.user._id);
+    const addTrip = await User.findById(user._id);
+
+    if(!addTrip){
+        return res.json({
+            message:"Cannot find the user, not authorized."
+        })
+    };
+    
     const bike = await Bike.findById(bikeId);
     if(!bike){
         return res.json({message: 'Bike is not available or not found.'});
@@ -44,7 +51,7 @@ module.exports.postTrip = async(req,res,next) => {
     })
     
     await trip.save();
-    await addTrip.trips.push(trip._id);
+    addTrip.trips.push(trip._id);
     await addTrip.save();
     return res.json({message: "Your trip has started!", trip} );
 };

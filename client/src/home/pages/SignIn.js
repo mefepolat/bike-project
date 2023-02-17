@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import "./SignIn.css";
 import { AuthContext } from "../../shared/components/AuthContext";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
