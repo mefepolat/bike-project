@@ -14,7 +14,7 @@ const Trips = () => {
                'Content-Type': 'application/json'
             }
          });
-         console.log(response.data)
+         console.log(response)
         setTrips(response.data);
       } catch (error) {
         setError(error);

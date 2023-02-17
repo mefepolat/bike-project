@@ -30,7 +30,7 @@ const HomePage = () => {
             if (data.data !== null) {
               setActiveTrip(data.data);
             } else {
-              console.log(data.message);
+              
             }
           })
           .catch((error) => {

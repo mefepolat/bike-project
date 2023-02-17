@@ -28,7 +28,7 @@ const SignIn = () => {
       const data = await response.json();
       
       const user = data.session;
-      
+      console.log(user)
         login(user);
         
         navigate("/");

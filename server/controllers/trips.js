@@ -6,13 +6,13 @@ const ObjectId = require('mongodb').ObjectId;
 const Station = require('../models/station');
 
 module.exports.getTrips = async(req,res,next) => {
-    const trips = await Trips.find({});
+    const trips = await Trip.find({});
     if(!trips){
         throw new ExpressError(`There's a problem with the database`, 400);
     }
     
     res.setHeader('Content-Type', 'application/json');
-    res.json(trips);
+    return res.json(trips);
 }
 
 
@@ -102,7 +102,7 @@ module.exports.checkTripStatus = async(req,res) => {
     
 
 if (!latestTrip) {
-    return res.status(401).json({
+    return res.json({
         message: 'Empty',
         data: null
     });

@@ -12,7 +12,8 @@ function BeginTrip({onBeginTrip}) {
   useEffect(() =>{
     const checkSession = async() =>{
       const dummy = await fetchSession();
-      setUser(dummy);
+      
+      setUser(dummy.user);
     }
     checkSession();
   }, [user]);
@@ -22,7 +23,7 @@ function BeginTrip({onBeginTrip}) {
         const response = await fetch("http://localhost:3000/api/stations");
         const data = await response.json();
         setStations(data);
-        console.log(data)
+      
       } catch (err) {
         console.error(err);
       }

@@ -6,7 +6,7 @@ export const AuthContext = createContext({
     user:null,
     login: (user) => {},
     logout: () => {},
-    
+    updateUser: (newUser) => {}
 });
 
 export const AuthProvider = (props) => {
@@ -28,6 +28,10 @@ export const AuthProvider = (props) => {
         }
     }, [user])
 
+    const updateUser = (newUser) => {
+        setUser(newUser);
+      };
+    
 
     const login = (user) => {
         setUser(user);
@@ -41,7 +45,7 @@ export const AuthProvider = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{user, login, logout, updateUser}}>
             {props.children}
         </AuthContext.Provider>
     )

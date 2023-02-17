@@ -4,11 +4,14 @@ import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
 
 const NavBar = () => {
-   const {user} = useContext(AuthContext);
+   const {user, updateUser} = useContext(AuthContext);
+  
     return (
         <nav>
             <img src="../../images/logo.png" alt="Logo" className="logo" />
             <a href="/">Home</a>
+            {user && user.user.admin ? <a href="/admin">Admin</a>
+            : ""}
             <a href="/about">About</a>
           
             {user ? (
