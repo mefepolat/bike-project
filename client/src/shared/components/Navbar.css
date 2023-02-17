@@ -1,20 +1,16 @@
 nav {
-    width: 95%;
     display: flex;
-    justify-content:flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    color: aliceblue;
-    margin-top: 2em;
 }
 
-nav a{
+.logo {
+    margin-right: auto;
+}
+
+nav a {
     text-decoration: none;
     color: aliceblue;
     padding: 10px 20px;
-    display: inline-block;
-}
-
-nav a:last-child{
-    margin-left: 10px;
 }
