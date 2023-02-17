@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-
 import "./EndTrip.css";
 
 const EndTrip = ({tripId, onEndTrip}) => {
    
     const [endStation, setEndStation] = useState('');
     const [selectedStation, setSelectedStation] = useState('');
+ 
     function handleEndStationChange(event){
         setSelectedStation(event.target.value);
     }
+
+
 
     useEffect(() => {
         const fetchStations = async () => {
@@ -46,6 +48,7 @@ const EndTrip = ({tripId, onEndTrip}) => {
     }
     
     return (
+        <div>
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="end_station">Drop off station:</label>
@@ -63,6 +66,8 @@ const EndTrip = ({tripId, onEndTrip}) => {
             </div>
             <button className="end_button" type="submit">End Trip</button>
             </form>
+            
+            </div>
     )
 }
 

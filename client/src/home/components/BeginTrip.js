@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import './BeginTrip.css';
-import {useContext} from "react";
-import {AuthContext} from "../../shared/components/AuthContext";
+import { fetchSession } from "../../shared/components/FetchSession";
 
 function BeginTrip({onBeginTrip}) {
   const [station, setStation] = useState('');
@@ -9,7 +8,14 @@ function BeginTrip({onBeginTrip}) {
   const [bikes, setBikes] = useState([]);
   const [selectedBike, setSelectedBike] = useState('');
   const [stations, setStations] = useState([]);
-
+  const [user, setUser] = useState({});
+  useEffect(() =>{
+    const checkSession = async() =>{
+      const dummy = await fetchSession();
+      setUser(dummy);
+    }
+    checkSession();
+  }, [user]);
   useEffect(() => {
     const fetchStations = async () => {
       try {
@@ -42,7 +48,7 @@ function BeginTrip({onBeginTrip}) {
     }
   }, [station]);
 
-  const {user} = useContext(AuthContext);
+  
   const handleStationChange = (event) => {
     setStation(event.target.value);
     
@@ -56,7 +62,7 @@ function BeginTrip({onBeginTrip}) {
  
   const handleSubmit = async(e) => {
     e.preventDefault();
-   
+   console.log(user)
     const startDate = new Date().toISOString();
     try{
       const response = await fetch("http://localhost:3000/api/newTrip", {
