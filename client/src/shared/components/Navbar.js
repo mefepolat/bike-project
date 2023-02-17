@@ -8,6 +8,7 @@ const NavBar = () => {
   
     return (
         <nav>
+            <img src="../../images/logo.png" alt="Logo" className="logo" />
             <a href="/">Home</a>
             {user && user.user.admin ? <a href="/admin">Admin</a>
             : ""}
@@ -27,3 +28,5 @@ const NavBar = () => {
 }
 
 export default NavBar;
+
+//This is an github clear
