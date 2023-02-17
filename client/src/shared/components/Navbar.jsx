@@ -25,3 +25,5 @@ const NavBar = () => {
 }
 
 export default NavBar;
+
+//This is an github clear
