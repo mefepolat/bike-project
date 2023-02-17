@@ -101,7 +101,7 @@ app.get('/api/session', (req, res) => {
   const session = req.session;
   
   if (session && session.user) {
-    res.json({ loggedIn: true, user: session.user });
+    res.json({ loggedIn: true, user: session });
   } else {
     res.json({ loggedIn: false });
   }

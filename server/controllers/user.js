@@ -31,14 +31,15 @@ module.exports.login = (req, res, next) => {
       }
 
       const newUser = { ...user };
-
+      console.log(user)
       req.session.user = {
         _id: user._id,
         username: user.username,
         trips: user.trips,
+        admin: user.admin
       };
-
-      return res.json({ newUser, session: req.session });
+      console.log(req.session.user)
+      return res.json({ session: req.session });
     });
   })(req, res, next);
 };

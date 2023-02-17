@@ -12,7 +12,7 @@ Our mission
 Bike Montréal, an active mode of transportation contributing to the health and well-being of Montrealers.
 
 Our vision 
-To be recognized as a key player in Montreal’s public transit system.
+To be recognized as a key player in Montreal's public transit system.
 
 Our values
 Excellence - Integrity - Customer Relations - Social Responsibility - Respect - Collaboration 
