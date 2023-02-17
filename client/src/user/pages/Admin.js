@@ -1,23 +1,28 @@
-import Inventory from "../components/Inventory";
-import InventoryTable from "../components/Table";
-import Trips from "../components/Trips";
-import { Navigate } from "react-router";
-import { useContext } from "react";
-import { AuthContext } from "../../shared/components/AuthContext";
-
-const Admin = ({user}) => {
-    
+import Table from "../components/Table";
+import { Navigate,useLocation } from "react-router";
+import NavigationMenu from "../components/NavigationMenu";
+import BikeMap from "../../shared/components/BikeMap";
+import "./Admin.css";
+const Admin = ({user}) => { 
+    const location = useLocation();
     console.log(user);
     if(!user || user.user.admin === false) {
         return <Navigate to="/" />
     }
     return (
-        <div>
-            <h1>Admin Page</h1>
-            <Inventory />
-            <InventoryTable />
-            <Trips />
+        <div className="admin-layout">
+      <header className="admin-header">
+      </header>
+      <div className="admin-main">
+        <div className="admin-map">
+          <BikeMap />
         </div>
+        <div className="admin-table">
+          <Table />
+        </div>
+      
+      </div>
+    </div>
     )
 };
 
