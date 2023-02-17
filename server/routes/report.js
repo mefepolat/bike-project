@@ -13,4 +13,4 @@ module.exports = router;
 
 
 
-//A pull request is to be created for this issue.
+//Any update will be fetched from the database and the user will be redirected to the home page
