@@ -7,7 +7,6 @@ const ExpressError = require("./utils/ExpressError");
 const LocalStrategy = require("passport-local");
 const passport = require("passport");
 const cors = require("cors");
-const path = require("path");
 const MongoStore = require("connect-mongo");
 const session = require("express-session");
 const adminRoutes = require("./routes/admin");
@@ -29,11 +28,19 @@ const cookieParser = require("cookie-parser");
 
 const dbUrl = "mongodb://127.0.0.1:27017/bike-rental";
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
+
+mongoose.set("strictQuery", false);
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error"));
+db.once("open", () => {
+  console.log("database connection");
+});
+
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -41,6 +48,7 @@ const store = MongoStore.create({
   crypto: {
     secret: "justasecret",
   },
+  collectionName: "sessions"
 });
 
 store.on("error", (err) => {
@@ -52,7 +60,7 @@ const sessionConfig = {
   name: "session",
   secret: "justasecret",
   resave: true,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     httpOnly: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
@@ -111,16 +119,10 @@ app.use((err, req, res, next) => {
   res.status(statusCode).send({ error: err.message });
 });
 
-mongoose.set("strictQuery", false);
-mongoose.connect(dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error"));
-db.once("open", () => {
-  console.log("database connection");
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
 });
 
 app.set("view engine", "jsx");

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Table.css";
 const Table = () => {
   const [stations, setStations] = useState([]);
-  console.log(stations);
+  
   useEffect(() => {
     const getStations = async () => {
       const response = await fetch("http://localhost:3000/api/stations", {
@@ -12,7 +12,7 @@ const Table = () => {
         },
       });
       const data = await response.json();
-      console.log(data);
+      
       if (response) {
         setStations(data);
       } else {

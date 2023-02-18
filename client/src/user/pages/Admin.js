@@ -4,7 +4,7 @@ import { Navigate } from "react-router";
 import BikeMap from "../../shared/components/BikeMap";
 import "./Admin.css";
 const Admin = ({ user }) => {
-  console.log(user);
+ 
   if (!user || user.user.admin === false) {
     return <Navigate to="/" />;
   }
