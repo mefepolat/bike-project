@@ -7,5 +7,3 @@ const { isLoggedIn } = require("../middleware.js");
 router.post("/create-report", catchAsync(createReport));
 
 module.exports = router;
-
-
