@@ -31,27 +31,30 @@ module.exports.login = (req, res, next) => {
       }
 
       const newUser = { ...user };
-      console.log(user);
+      
       req.session.user = {
         _id: user._id,
         username: user.username,
         trips: user.trips,
         admin: user.admin,
       };
-      console.log(req.session.user);
+    
       return res.json({ session: req.session });
     });
   })(req, res, next);
 };
 
 module.exports.logout = (req, res, next) => {
+  
   req.session.destroy();
-
+ 
   req.logout(function (error) {
+    res.clearCookie("session");
     if (error) {
+     
       next(error);
     }
-    res.clearCookie("session");
+    
     return res.json({
       success: true,
       message: "Successfully logged out.",

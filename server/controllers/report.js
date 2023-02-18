@@ -24,13 +24,14 @@ module.exports.createReport = async (req, res, next) => {
       });
     }
 
-    const report = new Report({ title, description });
+    
     const endDate = new Date().toISOString();
     const trip = await Trip.findByIdAndUpdate(id, {
       isActive: false,
       end_date: endDate,
       end_station: "",
     });
+    const report = new Report({ title, description, bike:trip.bike });
     const bike = await Bike.findByIdAndUpdate(trip.bike, {
       isRented: false,
       $unset: { station: 1 },
@@ -57,3 +58,14 @@ module.exports.createReport = async (req, res, next) => {
     return res.status(400).json(err);
   }
 };
+
+
+module.exports.getReports = async (req,res) => {
+    const reports = Report.find({}).populate('author');
+    if(!reports){
+        return res.json({
+            message: "There are no active reports."
+        })
+    }
+    return res.json({reports});
+}

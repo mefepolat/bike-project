@@ -61,18 +61,19 @@ function BeginTrip({ onBeginTrip }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    
     const startDate = new Date().toISOString();
     try {
       const response = await fetch("http://localhost:3000/api/newTrip", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ station, bikeId, startDate, user }),
       });
       const data = await response.json();
-      console.log(data);
+     
       onBeginTrip(data.trip._id);
     } catch (err) {
       console.error(err);

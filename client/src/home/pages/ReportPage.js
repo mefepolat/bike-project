@@ -9,7 +9,8 @@ const ReportPage = ({ tripId, onEndTrip, setShowReportPage }) => {
   const { user } = useContext(AuthContext);
 
   const dummyUser = user.user;
-  console.log(dummyUser);
+
+  
   const id = tripId.tripId;
   const handleChange = (event) => {
     setDescription(event.target.value);
@@ -21,6 +22,7 @@ const ReportPage = ({ tripId, onEndTrip, setShowReportPage }) => {
     try {
       const response = await fetch("http://localhost:3000/api/create-report", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -61,6 +63,7 @@ const ReportPage = ({ tripId, onEndTrip, setShowReportPage }) => {
             value="lost"
             checked={category === "lost"}
             onChange={(event) => setCategory(event.target.value)}
+            required
           />
           Stolen/Lost
         </label>
@@ -71,8 +74,9 @@ const ReportPage = ({ tripId, onEndTrip, setShowReportPage }) => {
             type="radio"
             name="category"
             value="repair"
-            defaultChecked
+            checked={category === "repair"}
             onChange={(event) => setCategory(event.target.value)}
+            required
           />
           Needs Maintenance
         </label>

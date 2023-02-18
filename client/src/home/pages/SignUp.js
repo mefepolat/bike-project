@@ -44,6 +44,7 @@ const SignUpForm = () => {
           name="username"
           value={username}
           onChange={(event) => setUsername(event.target.value)}
+          required
         />
       </div>
       <div>
@@ -53,6 +54,7 @@ const SignUpForm = () => {
           id="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          required
         />
       </div>
       <div>
@@ -62,6 +64,7 @@ const SignUpForm = () => {
           id="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          required
         />
       </div>
       <div>
@@ -71,6 +74,7 @@ const SignUpForm = () => {
           id="confirmPassword"
           value={confirmPassword}
           onChange={(event) => setConfirmPassword(event.target.value)}
+          required
         />
       </div>
       <button type="submit">{isLoading ? "Signing up..." : "Sign Up"}</button>
