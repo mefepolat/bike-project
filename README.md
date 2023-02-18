@@ -1,5 +1,5 @@
    <p> Introduction </p>
- <p>🚲 At www.bikeit.com, we aim to make cycling easy, enjoyable, and accessible to everyone.</p>
+ <p>🚲 At www.justbikeit.com, we aim to make cycling easy, enjoyable, and accessible to everyone.</p>
  <p>🚴‍♂️ We provide a convenient and affordable platform for renting high-quality bicycles.</p>
  <p>🌱 Besides promoting sustainability and reducing carbon emissions, we help people discover cycling's joy and health benefits. </p>
  <p>🧘 As a result of facilitating easy access to bicycles, we hope to create more healthy, vibrant, and sustainable communities. </p>
