@@ -10,9 +10,9 @@ const HomePage = () => {
   const [activeTrip, setActiveTrip] = useState(null);
   const [showReportPage, setShowReportPage] = useState(false);
 
- function handleClickReport() {
+  function handleClickReport() {
     setShowReportPage(true);
-  };
+  }
 
   useEffect(() => {
     if (user) {
@@ -30,7 +30,6 @@ const HomePage = () => {
             if (data.data !== null) {
               setActiveTrip(data.data);
             } else {
-              
             }
           })
           .catch((error) => {
@@ -67,11 +66,15 @@ const HomePage = () => {
 
               <div className="bike-and-trip">
                 {showReportPage ? (
-                  <ReportPage tripId={activeTrip} onEndTrip={handleEndTrip}  setShowReportPage={handleClickReport}/>
+                  <ReportPage
+                    tripId={activeTrip}
+                    onEndTrip={handleEndTrip}
+                    setShowReportPage={handleClickReport}
+                  />
                 ) : (
                   <>
                     <BikeMap />
-                    <EndTrip tripId={activeTrip} onEndTrip={handleEndTrip}  />
+                    <EndTrip tripId={activeTrip} onEndTrip={handleEndTrip} />
                   </>
                 )}
               </div>

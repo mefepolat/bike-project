@@ -1,52 +1,50 @@
-import {createContext, useEffect, useState} from 'react';
-import { fetchSession } from './FetchSession';
-import Cookies from 'js-cookie';
+import { createContext, useEffect, useState } from "react";
+import { fetchSession } from "./FetchSession";
+import Cookies from "js-cookie";
 
 export const AuthContext = createContext({
-    user:null,
-    login: (user) => {},
-    logout: () => {},
-    updateUser: (newUser) => {}
+  user: null,
+  login: (user) => {},
+  logout: () => {},
+  updateUser: (newUser) => {},
 });
 
 export const AuthProvider = (props) => {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const checkLoginStatus = async() =>{
-            const session = await fetchSession();
-           
-            setUser(session|| null);
-        };
-        checkLoginStatus();
-    },[])
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const session = await fetchSession();
 
-    useEffect(() => {
-        if (!user) {
-            Cookies.remove('session');
-            
-        }
-    }, [user])
-
-    const updateUser = (newUser) => {
-        setUser(newUser);
-      };
-    
-
-    const login = (user) => {
-        setUser(user);
-        Cookies.set('session', user, {expires: 7})
+      setUser(session || null);
     };
+    checkLoginStatus();
+  }, []);
 
-    const logout = () => {
-        setUser(null);
-       
-        Cookies.remove('session');
+  useEffect(() => {
+    if (!user) {
+      Cookies.remove("session");
     }
+  }, [user]);
 
-    return (
-        <AuthContext.Provider value={{user, login, logout, updateUser}}>
-            {props.children}
-        </AuthContext.Provider>
-    )
-}
+  const updateUser = (newUser) => {
+    setUser(newUser);
+  };
+
+  const login = (user) => {
+    setUser(user);
+    Cookies.set("session", user, { expires: 7 });
+  };
+
+  const logout = () => {
+    setUser(null);
+
+    Cookies.remove("session");
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
+      {props.children}
+    </AuthContext.Provider>
+  );
+};

@@ -1,9 +1,7 @@
 const Station = require("../models/station");
 
+module.exports.getStations = async (req, res) => {
+  const stations = await Station.find({}).populate("availableBikes");
 
-
-module.exports.getStations = async(req,res) => {
-    const stations = await Station.find({}).populate('availableBikes');
-
-    return res.json(stations)
-}
+  return res.json(stations);
+};
