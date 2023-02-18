@@ -54,7 +54,7 @@ const BikeMap = () => {
   }, []);
 
   cluster.load(stations);
- 
+
   const markers = isClusterLoaded
     ? cluster.getClusters([-180, -85, 180, 85], 5)
     : [];
@@ -102,17 +102,17 @@ const BikeMap = () => {
             )}
           </CustomMarker>
         ))}
-        {selectedCluster && (
-            <div className="info-box">
-                <p>Cluster center: {selectedCluster.properties.cluster_name}</p>
-                <p>{selectedCluster.properties.point_count}</p>
-            </div>
-        )}
-        {selectedMarker && (
-            <div className="info-box">
-                <p>{selectedMarker.properties.stationName}</p>
-            </div>
-        )}
+      {selectedCluster && (
+        <div className="info-box">
+          <p>Cluster center: {selectedCluster.properties.cluster_name}</p>
+          <p>{selectedCluster.properties.point_count}</p>
+        </div>
+      )}
+      {selectedMarker && (
+        <div className="info-box">
+          <p>{selectedMarker.properties.stationName}</p>
+        </div>
+      )}
     </Map>
   );
 };

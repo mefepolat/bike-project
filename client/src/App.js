@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./home/pages/Home";
 import "./App.css";
 import Admin from "./user/pages/Admin";
@@ -22,7 +17,7 @@ import PrivateRoute from "./shared/components/PrivateRoute";
 function App() {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     const checkSession = async () => {
       const dummy = await fetchSession();
@@ -39,15 +34,14 @@ function App() {
 
   return (
     <AuthProvider>
-     
       <div
         className="body_section"
         style={{ backgroundImage: `url(${background})` }}
       >
         <div className="overlay">
-        <BrowserRouter>
-          <NavBar />
-          
+          <BrowserRouter>
+            <NavBar />
+
             <Routes>
               <Route path="/" element={<HomePage />} />
 
@@ -67,15 +61,11 @@ function App() {
               <Route path="/report" element={<ReportPage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-            
           </BrowserRouter>
-            </div>
-          </div>
-          <Footer />
-          
-    
+        </div>
+      </div>
+      <Footer />
     </AuthProvider>
-   
   );
 }
 

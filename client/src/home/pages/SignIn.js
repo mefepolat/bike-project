@@ -26,13 +26,12 @@ const SignIn = () => {
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      
+
       const user = data.session;
-      console.log(user)
-        login(user);
-        
-        navigate("/");
-      
+      console.log(user);
+      login(user);
+
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError("Could not sign in. Please try again.");
